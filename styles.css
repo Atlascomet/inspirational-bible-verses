@@ -1,0 +1,115 @@
+/* styles.css - updated: subtle overlay + improved main box contrast
+   Recommended: Place background image at images/background-2.jpg (no spaces).
+   Two overlay methods are shown below; the file uses the gradient overlay method
+   (simpler, no pseudo-element). Adjust overlay alpha to taste. */
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  /* Fallback color while image loads */
+  background-color: #f4f4f9;
+
+  /* Layer an overlay over the image using a CSS gradient, then add the image.
+     This improves contrast without changing the HTML. Adjust rgba(...) alpha
+     value to make the overlay darker or lighter. */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10)),
+    url("images/background-2.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; /* disabled for small screens in media query */
+  color: #222;
+  margin: 0;
+  padding: 0;
+
+  /* Ensure stacking context for any pseudo overlays if used later */
+  position: relative;
+}
+
+/* Navigation */
+nav {
+  background: rgba(40, 53, 147, 0.9); /* slightly translucent to let background peek */
+  padding: 1em;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 0.75em;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #ffeb3b;
+}
+
+/* Main content box */
+main {
+  /* Slightly more opaque light-blue for strong contrast over background */
+  background: rgba(227, 242, 253, 0.96); /* #e3f2fd with higher opacity */
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  position: relative;
+  z-index: 1; /* sit above the overlay layer */
+  border: 1px solid rgba(255,255,255,0.4); /* subtle highlight for contrast */
+}
+
+/* Headings and text */
+h1 {
+  color: #283593;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  color: #1565c0;
+  margin-bottom: 0.5em;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+
+/* Emphasis color */
+b {
+  color: #1565c0;
+}
+
+/* Make sure main remains readable on small screens */
+@media (max-width: 600px) {
+  main {
+    margin: 1em;
+    padding: 1em;
+  }
+  /* disable fixed background on small screens for performance/compatibility */
+  body {
+    background-attachment: scroll;
+    /* slightly reduce overlay on small screens to keep visuals light */
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)),
+      url("images/background-2.jpg");
+  }
+}}
+
+/* Alternative overlay approach (commented):
+   If you prefer a dedicated overlay element, you can use body::before with
+   position: fixed + pointer-events: none and then raise main/nav above it.
+   Example:
+   body::before {
+     content: "";
+     position: fixed;
+     inset: 0;
+     background: rgba(0,0,0,0.25);
+     z-index: 0;
+     pointer-events: none;
+   }
+   Then set nav and main to position: relative; z-index: 1;
+*/
