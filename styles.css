@@ -13,7 +13,7 @@ body {
      value to make the overlay darker or lighter. */
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10)),
-    url("main/images/background-2.jpg");
+    url("images/background-2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -114,4 +114,5 @@ b {
    Then set nav and main to position: relative; z-index: 1;
 
 */
+
 
